@@ -11,7 +11,7 @@ export interface simplifiedProduct{
 export interface fullProduct{
     title: string;
     _id: string;
-    images: any;
+    images: Array<{ asset: { _ref: string; _type: string } }> ;
     price: number;
     slug: string;
     categoryName: string;

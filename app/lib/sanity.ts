@@ -13,7 +13,7 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 
 
-export const urlFor = (source: any) => {
+export const urlFor = (source: { asset: { _ref: string; _type: string } }) => {
     return builder.image(source);
 // this function generates the URL for the image source passed to it, allowing you to display images from Sanity in your Next.js application.
-}; 
+};

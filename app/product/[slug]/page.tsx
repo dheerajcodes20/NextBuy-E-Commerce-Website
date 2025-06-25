@@ -1,4 +1,4 @@
-// import ImageGallery from "@/app/components/ImageGallery";
+
 import AddToBag from "@/app/components/AddToBag";
 import CheckoutNow from "@/app/components/CheckoutNow";
 import ImageGallery from "@/app/components/imageGallery";
