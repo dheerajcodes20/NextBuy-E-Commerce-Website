@@ -24,13 +24,14 @@ export default function AddToBag({
   const { addItem, handleCartClick } = useShoppingCart();
 
   const product = {
-    name: name,
-    description: description,
-    price: price,
-    currency: currency,
-    image: urlFor(image).url(),
-    price_id: price_id,
-  };
+  id: price_id, // Stripe expects this!
+  name: name,
+  description: description,
+  price: price,
+  currency: currency,
+  image: urlFor(image).url(),
+  price_id: price_id,
+};
   return (
     <Button className=" hover:bg-white hover:border hover:border-black"
       onClick={() => {
