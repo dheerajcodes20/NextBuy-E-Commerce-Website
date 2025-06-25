@@ -9,7 +9,7 @@ export interface ProductCart {
   description: string;
   price: number;
   currency: string;
-  image: any;
+  image: { asset: { _ref: string; _type: string } }; // Replace 'any' with a specific type
   price_id: string;
 }
 
@@ -24,18 +24,19 @@ export default function AddToBag({
   const { addItem, handleCartClick } = useShoppingCart();
 
   const product = {
-  id: price_id, // Stripe expects this!
-  name: name,
-  description: description,
-  price: price,
-  currency: currency,
-  image: urlFor(image).url(),
-  price_id: price_id,
-};
+    id: price_id, // Stripe expects this!
+    name: name,
+    description: description,
+    price: price,
+    currency: currency,
+    image: urlFor(image).url(),
+    price_id: price_id,
+  };
   return (
     <Button className=" hover:bg-white hover:border hover:border-black"
       onClick={() => {
-        addItem(product), handleCartClick();
+        addItem(product);
+        handleCartClick();
       }}
     >
       Add To Cart
