@@ -2,36 +2,23 @@
 
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
-import { urlFor } from "../lib/sanity";
-import { ProductCart } from "./AddToBag";
 
 export default function CheckoutNow({
-  currency,
-  description,
-  image,
-  name,
-  price,
   price_id,
-}: ProductCart) {
+}: {
+  price_id: string;
+}) {
   const { checkoutSingleItem } = useShoppingCart();
 
   function buyNow(priceId: string) {
     checkoutSingleItem(priceId);
   }
 
-  const product = {
-    name: name,
-    description: description,
-    price: price,
-    currency: currency,
-    image: urlFor(image).url(),
-    price_id: price_id,
-  };
   return (
     <Button
       className="text-black bg-gray-200 hover:bg-white hover:border hover:border-black "
       onClick={() => {
-        buyNow(product.price_id);
+        buyNow(price_id);
       }}
     >
       Checkout Now

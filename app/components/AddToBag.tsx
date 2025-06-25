@@ -35,6 +35,7 @@ export default function AddToBag({
   return (
     <Button className=" hover:bg-white hover:border hover:border-black"
       onClick={() => {
+        if (!price_id) return;
         addItem(product);
         handleCartClick();
       }}

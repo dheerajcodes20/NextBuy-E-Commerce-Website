@@ -1,4 +1,3 @@
-
 import AddToBag from "@/app/components/AddToBag";
 import CheckoutNow from "@/app/components/CheckoutNow";
 import ImageGallery from "@/app/components/imageGallery";
@@ -26,10 +25,29 @@ async function getData(slug: string) {
 
 export const dynamic = "force-dynamic";
 
+// Await params before using
 export default async function ProductPge(
-  { params }: { params: { slug: string } }) {
-  // const { params } =  props; 
-  const data: fullProduct = await getData(params.slug);
+  { params }: { params: Promise<{ slug?: string }> }
+) {
+  const resolvedParams = await params;
+
+  if (!resolvedParams?.slug) {
+    return (
+      <div className="bg-white p-8 text-center">
+        <h2 className="text-xl font-bold">Invalid product link.</h2>
+      </div>
+    );
+  }
+
+  const data: fullProduct | null = await getData(resolvedParams.slug);
+
+  if (!data) {
+    return (
+      <div className="bg-white p-8 text-center">
+        <h2 className="text-xl font-bold">Product not found.</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
@@ -89,14 +107,7 @@ export default async function ProductPge(
                 price_id={data.price_id}
               />
               <CheckoutNow 
-                currency="USD"
-                description={data.description}
-                image={data.images[0]}
-                name={data.title}
-                price={data.price}
-                key={data._id}
                 price_id={data.price_id}
-               
               />
             </div>
 
