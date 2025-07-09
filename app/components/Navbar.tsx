@@ -32,7 +32,7 @@ export default function Navbar() {
       <div className='flex items-center justify-between mx-auto max-w-2xl px-4  sm:px-6 lg:max-w-7xl'>
         {/* Left side - Logo */}
         <Link href='/' >
-          <h1 className='text-xl sm:text-2xl md:text-4xl font-bold '>
+          <h1 className='text-3xl sm:text-2xl md:text-4xl font-bold '>
             Next<span className="text-primary">Buy</span>
           </h1>
         </Link>
