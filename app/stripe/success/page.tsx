@@ -10,13 +10,20 @@ export default function stripeSuccess() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Delay to ensure hydration is complete
       setTimeout(() => {
         clearCart();
-        // Fallback: clear localStorage cart directly
-        localStorage.removeItem("cart-mode-client-only");
-        localStorage.removeItem("cart");
-        console.log("Cart cleared after payment success (with fallback)");
+        // Log all localStorage keys/values for debugging
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.toLowerCase().includes("cart")) {
+            console.log(`Removing localStorage key: ${key}`);
+            localStorage.removeItem(key);
+          }
+        }
+        // Log localStorage after clearing
+        console.log("localStorage after clearing:", { ...localStorage });
+        // Force reload to ensure UI updates
+        window.location.reload();
       }, 200);
     }
   }, []); // Only run once on mount
