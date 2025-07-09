@@ -9,7 +9,16 @@ export default function stripeSuccess() {
   const { clearCart } = useShoppingCart();
 
   useEffect(() => {
-    clearCart();
+    if (typeof window !== "undefined") {
+      // Delay to ensure hydration is complete
+      setTimeout(() => {
+        clearCart();
+        // Fallback: clear localStorage cart directly
+        localStorage.removeItem("cart-mode-client-only");
+        localStorage.removeItem("cart");
+        console.log("Cart cleared after payment success (with fallback)");
+      }, 200);
+    }
   }, []); // Only run once on mount
 
   return (
