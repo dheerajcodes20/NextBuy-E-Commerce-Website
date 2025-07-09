@@ -10,7 +10,7 @@ export default function stripeSuccess() {
 
   useEffect(() => {
     clearCart();
-  }, [clearCart]); // Only run once on mount
+  }, []); // Only run once on mount
 
   return (
     <div className="h-screen">
