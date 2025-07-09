@@ -6,15 +6,15 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
 
+
 // import { useState } from 'react';
 // import clsx from 'clsx';
 // Optional helper (can also use normal JS)
 
 
 export default function Navbar() {
-
   const pathname = usePathname(); 
-  const {handleCartClick}= useShoppingCart()
+  const { handleCartClick, cartCount = 0 } = useShoppingCart();
 
   // Define menu links
   const links = [
@@ -32,7 +32,7 @@ export default function Navbar() {
       <div className='flex items-center justify-between mx-auto max-w-2xl px-4  sm:px-6 lg:max-w-7xl'>
         {/* Left side - Logo */}
         <Link href='/' >
-          <h1 className='text-2xl sm:text-2xl md:text-4xl font-bold '>
+          <h1 className='text-3xl sm:text-2xl md:text-4xl font-bold '>
             Next<span className="text-primary">Buy</span>
           </h1>
         </Link>
@@ -57,16 +57,20 @@ export default function Navbar() {
         </nav>
 
         {/* Shopping Bag Icon */}
-        <div className='flex divide-x border-r sm:border-l '>
+        <div className='flex divide-x border-r sm:border-l relative'>
           <Button variant={"outline"} 
-          onClick={()=> handleCartClick()}
-          className='flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none bg-white hover:bg-gray-100 '>
+            onClick={()=> handleCartClick()}
+            className='flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none bg-white hover:bg-gray-100 relative'>
             <ShoppingBag className='size-6'/>
+            {cartCount > 0 && (
+              <span className="absolute top-1 right-1 bg-primary text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
             <span className='hidden text-xs font-semibold text-gray-500 sm:block '>
               Cart
             </span>
           </Button>
-          
         </div>
       </div>
 
